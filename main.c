@@ -60,24 +60,6 @@ char read_key() {
   return chr;
 }
 
-int get_cursor_position() {
-  if (write(STDOUT_FILENO, "\x1b[6n", 4) != 4)
-    return -1;
-
-  printf("\n\r");
-  char chr;
-  while (read(STDIN_FILENO, &chr, 1) == 1) {
-    if (iscntrl(chr)) {
-      printf("%d\r\n", chr);
-    } else {
-      printf("%d(%c)\r\n", chr, chr);
-    }
-  }
-  read_key();
-
-  return -1;
-}
-
 int get_size(int *row, int *col) {
   struct winsize ws;
   if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1 || ws.ws_col == 0)
