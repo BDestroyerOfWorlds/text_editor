@@ -125,6 +125,8 @@ void process_key() {
   case CTRL_KEY('q'):
     CLEAR_SCREEN;
     CURSOR_HOME;
+    write(STDOUT_FILENO, ab.bchr, ab.len);
+    appbuffer_free(&ab);
     exit(0);
     break;
   }
