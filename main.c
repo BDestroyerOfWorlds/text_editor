@@ -119,6 +119,7 @@ void refresh() {
 }
 
 void process_key() {
+  struct append_buffer ab = APPBUFFER_INIT;
   char chr = read_key();
   switch (chr) {
   case CTRL_KEY('q'):
