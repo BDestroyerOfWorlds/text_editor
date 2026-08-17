@@ -2,7 +2,6 @@
 
 #include <asm-generic/errno-base.h>
 #include <asm-generic/ioctls.h>
-#include <ctype.h>
 #include <errno.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -72,8 +71,14 @@ int get_size(int *row, int *col) {
 }
 
 void draw_rows() {
-  for (int i = 0; i < Defalult.screen_rows; i++)
-    write(STDOUT_FILENO, ">\r\n", 3);
+  int i;
+  for (i = 0; i < Defalult.screen_rows; i++) {
+    write(STDOUT_FILENO, ">", 1);
+
+    if (i < Defalult.screen_rows - 1) {
+      write(STDOUT_FILENO, "\r\n", 2);
+    }
+  }
 }
 
 void refresh() {
